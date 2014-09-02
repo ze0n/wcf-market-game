@@ -62,6 +62,13 @@
     <None Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="samples\resources.csv" />
+    <None Include="samples\resources_dump.csv" />
+    <None Include="samples\users.csv" />
+    <None Include="samples\users_dump.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="samples\crafting_rules.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -149,7 +149,7 @@ namespace MarketServerLib.Gears
             foreach (var line in lines2)
             {
                 var ls = line.Split(Convert.ToChar(" "));
-                var rname = ls[0].Trim();
+                var rname = ls[0].Trim().ToUpper();
                 var rprice = ulong.Parse(ls[1].Trim());
                 var rprob = int.Parse(ls[2].Trim());
 
@@ -176,8 +176,9 @@ namespace MarketServerLib.Gears
 
                         Users[uname] = new User(uname, pass, GenerateProbs());
                         Users[uname].Score = score;
-                        Users[uname].IsActive = true;
                         Users[uname].Endpoint = ep;
+                        Users[uname].IsActive = ep != "";
+                        
 
                         log.Debug("User {0} loaded with score {1}", uname, score);
                     }

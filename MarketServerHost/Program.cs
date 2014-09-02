@@ -36,6 +36,9 @@ namespace MarketServerHost
 
             RG.StopThread();
             host.Close();
+
+            u.Dispose();
+            r.Dispose();
         }
     }
 }

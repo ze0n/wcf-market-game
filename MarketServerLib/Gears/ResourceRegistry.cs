@@ -71,7 +71,7 @@ namespace MarketServerLib.Gears
             foreach (var line in lines)
             {
                 var ls = line.Split(Convert.ToChar(" "));
-                var rname = ls[0].Trim();
+                var rname = ls[0].Trim().ToUpper();
                 var rprice = ulong.Parse(ls[1].Trim());
                 var rprob = int.Parse(ls[1].Trim());
 
@@ -82,7 +82,15 @@ namespace MarketServerLib.Gears
                 log.Info("Resource {0} loaded. Proce {1}", rname, rprice);
             }
 
-            if(File.Exists("resources_dump.csv"))
+            var lines5 = File.ReadAllLines("crafting_rules.txt");
+
+            foreach (var line in lines5)
+            {
+                Rules.Add(line.Trim());
+                log.Info("Crafting rule loaded {0}", line);
+            }
+
+            if (File.Exists("resources_dump.csv"))
             {
                 log.Info("Loading resources from dump");
                 var lines0 = File.ReadAllLines("resources_dump.csv");
@@ -93,10 +101,10 @@ namespace MarketServerLib.Gears
                     {
                         var ls = line.Split(Convert.ToChar(" "));
                         var owner = ls[0].Trim();
-                        var resType = ls[1].Trim();
-                        var resId = Guid.Parse(ls[2].Trim());
+                        var resId = Guid.Parse(ls[1].Trim());
+                        var resType = ls[2].Trim().ToUpper();
 
-                        var r = new Resource(){Id = resId, ResourceType = resType};
+                        var r = new Resource() { Id = resId, ResourceType = resType };
                         var or = new OwnedResource(r, owner);
 
                         Resources[r.Id] = or;
@@ -172,6 +180,62 @@ namespace MarketServerLib.Gears
         {
             SaveDump();
             log.Info("ResourceRegistry is disposed");
+        }
+
+        private List<string> Rules = new List<string>(); 
+
+        public Resource Craft(Guid[] take, string restTypeToGet, string username)
+        {
+            if (take == null) throw new ArgumentNullException("take");
+            if (restTypeToGet == null) throw new ArgumentNullException("restTypeToGet");
+
+            lock (_syncData)
+            {
+                foreach (var guid in take)
+                {
+                    if (!Resources.ContainsKey(guid))
+                        throw new ArgumentOutOfRangeException("No such resource");
+
+                    if(Resources[guid].Owner != username)
+                        throw new ArgumentOutOfRangeException("Resource is not yours");
+                }
+
+                // search for rule
+                List<string> rtypes = new List<string>();
+                foreach (var guid in take)
+                {
+                    rtypes.Add(Resources[guid].Resource.ResourceType);
+                }
+                rtypes.Sort();
+
+                var left = String.Join("+", rtypes);
+                var rule = left + "=" + restTypeToGet;
+
+                if(Rules.Contains(rule))
+                {
+                    foreach (var guid in take)
+                    {
+                        Resources.Remove(guid);
+                        log.Trace("Resource '{0}' removed", guid);
+                    }
+
+                    var or = new OwnedResource(new Resource() {Id = Guid.NewGuid(), ResourceType = restTypeToGet},
+                                               username);
+                    Resources.Add(or.Resource.Id, or);
+                    log.Trace("Resource '{0}' created", or.Resource);
+
+                    UsersRegistry.Instance.AddScore(username, 1, "craft");
+
+                    return or.Resource;
+                }
+                else
+                {
+                    throw new InvalidOperationException("No such rule");
+                }
+
+            }
+
+            
         }
     }
 }

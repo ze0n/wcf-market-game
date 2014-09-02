@@ -1,0 +1,7 @@
+fire+water=steam
+fire+sand=glass
+ore+fire=metal
+sand+sand+water+water=beach
+glass+stone+wood=house
+glass+metal+wood+steam=car
+car+house+beach=happiness

@@ -48,6 +48,8 @@ namespace MarketServerLib.Generator
         private static void ThreadFunc()
         {
             log.Info("Resource generator started in separate thread");
+            int day = 0;
+
             while (true)
             {
                 var users = UsersRegistry.Instance.GetActiveUsersList();
@@ -70,7 +72,19 @@ namespace MarketServerLib.Generator
                     }
                 }
 
-                Thread.Sleep(60000);
+
+                Console.WriteLine("-------------------------------------------------");
+                Console.WriteLine("Day #{0}", day++);
+                Console.WriteLine("-------------------------------------------------");
+                var tab = UsersRegistry.Instance.GetFinalScoreTable();
+                foreach (var f in tab.OrderByDescending(pair => pair.Value))
+                {
+                    Console.WriteLine("{0}\t\t{1}", f.Key, f.Value);
+                }
+                Console.WriteLine("-------------------------------------------------");
+
+
+                Thread.Sleep(20000);
 
                 if (StopRequest)
                 {

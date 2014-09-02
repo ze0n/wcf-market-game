@@ -17,6 +17,9 @@ namespace MarketServerLib.Services
         [OperationContract]
         void ActivateMeAt(string username, string password, string EndpointAddress);
 
+        [OperationContract]
+        Resource Craft(Guid[] take, string restTypeToGet, string username, string password);
+
 //        [OperationContract]
 //        Resource[] GetMyResources();
 //

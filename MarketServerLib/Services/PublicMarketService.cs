@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using MarketGame;
 using MarketServerLib.Gears;
 
 namespace MarketServerLib.Services
@@ -22,6 +23,25 @@ namespace MarketServerLib.Services
                 if (UsersRegistry.Instance.CheckLogin(username, password))
                 {
                     UsersRegistry.Instance.AcivateUser(username, EndpointAddress);
+                }
+                else
+                {
+                    throw new ArgumentException("authentification");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public Resource Craft(Guid[] take, string restTypeToGet, string username, string password)
+        {
+            try
+            {
+                if (UsersRegistry.Instance.CheckLogin(username, password))
+                {
+                    return ResourceRegistry.Instance.Craft(take, restTypeToGet, username);
                 }
                 else
                 {
