@@ -7,12 +7,12 @@ using System.Text;
 namespace MarketGame
 {
     [ServiceContract(Namespace = "http://escience.ifmo.ru/study/wcfmarketgame")]
-    interface ITrader
+    public interface ITrader
     {
         [OperationContract(Action = "http://escience.ifmo.ru/study/wcfmarketgame/GetResourcesCatalog")]
         string[] GetResourcesOffer();
 
-        [OperationContract(Action = "http://escience.ifmo.ru/study/wcfmarketgame/GetResourcesCatalog")]
-        bool OfferNaturalDeal(resourcesIGiveYou, string )
+//        [OperationContract(Action = "http://escience.ifmo.ru/study/wcfmarketgame/GetResourcesCatalog")]
+//        bool OfferNaturalDeal(resourcesIGiveYou, string )
     }
 }

@@ -15,12 +15,12 @@ namespace MarketServerLib.Services
         bool Ping();
 
         [OperationContract]
-        void ActivateMeAt(string EndpointAddress);
+        void ActivateMeAt(string username, string password, string EndpointAddress);
 
-        [OperationContract]
-        Resource[] GetMyResources();
-
-        [OperationContract]
-        void IWannaTradeWith
+//        [OperationContract]
+//        Resource[] GetMyResources();
+//
+//        [OperationContract]
+//        void IWannaTradeWith
     }
 }

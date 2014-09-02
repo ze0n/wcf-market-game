@@ -20,7 +20,7 @@ namespace MarketServerLib.Gears
         }
     }
 
-    class ResourceRegistry
+    public class ResourceRegistry : IDisposable
     {
         #region Singleton
         private static volatile ResourceRegistry instance;
@@ -30,8 +30,9 @@ namespace MarketServerLib.Gears
 
         private static readonly object _syncData = new Object();
         private Dictionary<Guid, OwnedResource> Resources = new Dictionary<Guid, OwnedResource>();
-
+        public List<string> ResourceTypesList = new List<string>();
         private Dictionary<string, ulong> ResourcesPrices = new Dictionary<string, ulong>();
+        public Dictionary<string, bool> ResourcesGenerated = new Dictionary<string, bool>();
 
         private IEnumerable<string> possibleOwners;
 
@@ -63,19 +64,60 @@ namespace MarketServerLib.Gears
 
         private void Initialization()
         {
-            possibleOwners = UsersRegistry.Instance.GetUsersList();
+            possibleOwners = UsersRegistry.Instance.GetAllUsersNamesList();
 
-            var lines = File.ReadAllLines("resources_prices.csv");
+            var lines = File.ReadAllLines("resources.csv");
 
             foreach (var line in lines)
             {
                 var ls = line.Split(Convert.ToChar(" "));
                 var rname = ls[0].Trim();
                 var rprice = ulong.Parse(ls[1].Trim());
+                var rprob = int.Parse(ls[1].Trim());
 
+                ResourceTypesList.Add(rname);
                 ResourcesPrices[rname] = rprice;
+                ResourcesGenerated[rname] = rprob == 1;
 
                 log.Info("Resource {0} loaded. Proce {1}", rname, rprice);
+            }
+
+            if(File.Exists("resources_dump.csv"))
+            {
+                log.Info("Loading resources from dump");
+                var lines0 = File.ReadAllLines("resources_dump.csv");
+
+                lock (_syncData)
+                {
+                    foreach (var line in lines0)
+                    {
+                        var ls = line.Split(Convert.ToChar(" "));
+                        var owner = ls[0].Trim();
+                        var resType = ls[1].Trim();
+                        var resId = Guid.Parse(ls[2].Trim());
+
+                        var r = new Resource(){Id = resId, ResourceType = resType};
+                        var or = new OwnedResource(r, owner);
+
+                        Resources[r.Id] = or;
+                    }
+                }
+            }
+        }
+
+        private void SaveDump()
+        {
+            lock (_syncData)
+            {
+                var f = File.CreateText("resources_dump.csv");
+
+                foreach (var pair in Resources)
+                {
+                    var or = pair.Value;
+                    f.WriteLine("{0} {1} {2}", or.Owner, or.Resource.Id, or.Resource.ResourceType);
+                }
+
+                f.Close();
             }
         }
 
@@ -124,6 +166,12 @@ namespace MarketServerLib.Gears
 
                 return S;
             }
+        }
+
+        public void Dispose()
+        {
+            SaveDump();
+            log.Info("ResourceRegistry is disposed");
         }
     }
 }

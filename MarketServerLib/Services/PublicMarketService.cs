@@ -15,22 +15,22 @@ namespace MarketServerLib.Services
             return true;
         }
 
-        public void ActivateMeAt(string EndpointAddress)
+        public void ActivateMeAt(string username, string password, string EndpointAddress)
         {
             try
             {
-                string username;
-                string password;
-
                 if (UsersRegistry.Instance.CheckLogin(username, password))
                 {
                     UsersRegistry.Instance.AcivateUser(username, EndpointAddress);
-                    UsersRegistry.Instance.AddScore(username, 20, "registration");
+                }
+                else
+                {
+                    throw new ArgumentException("authentification");
                 }
             }
             catch (Exception ex)
             {
-
+                throw ex;
             }
         }
     }
