@@ -7,7 +7,7 @@ using System.Text;
 namespace MarketGame
 {
     [ServiceContract(Namespace = "http://escience.ifmo.ru/study/wcfmarketgame")]
-    interface IResourceReceiver
+    public interface IResourceReceiver
     {
         [OperationContract]
         bool Ping();

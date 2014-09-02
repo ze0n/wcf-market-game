@@ -24,7 +24,7 @@ namespace MarketServerLib.Generator
                 EndpointAddress endpointAddress = new EndpointAddress(pEndpointAddress);
                 IResourceReceiver notifee = ChannelFactory<IResourceReceiver>.CreateChannel(binding, endpointAddress);
 
-                log.Debug("Sending notification: " + n.ToString());
+                log.Debug("Sending resource '{0}' to user '{1}'", R, );
                 using (notifee as IDisposable)
                     notifee.ReceiveResource(n);
 
