@@ -20,10 +20,7 @@ namespace MarketServerLib.Services
         [OperationContract]
         Resource Craft(Guid[] take, string restTypeToGet, string username, string password);
 
-//        [OperationContract]
-//        Resource[] GetMyResources();
-//
-//        [OperationContract]
-//        void IWannaTradeWith
+        [OperationContract]
+        Resource[] GetMyResources(string username, string password);
     }
 }

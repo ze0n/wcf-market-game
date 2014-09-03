@@ -48,7 +48,6 @@ namespace MarketServerLib.Gears
         private static readonly object _syncRoot = new Object();
         private static readonly Logger log = LogManager.GetCurrentClassLogger();
 
-
         private static readonly object _syncData = new Object();
         private Dictionary<string, User> Users = new Dictionary<string, User>();
 
@@ -158,8 +157,7 @@ namespace MarketServerLib.Gears
 
                 log.Info("Resource {0} loaded. Proce {1}", rname, rprice);
             }
-
-
+            
             if (File.Exists("users_dump.csv"))
             {
                 var lines = File.ReadAllLines("users_dump.csv");

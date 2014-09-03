@@ -53,5 +53,24 @@ namespace MarketServerLib.Services
                 throw ex;
             }
         }
+
+        public Resource[] GetMyResources(string username, string password)
+        {
+            try
+            {
+                if (UsersRegistry.Instance.CheckLogin(username, password))
+                {
+                    return ResourceRegistry.Instance.GetUserResources(username);
+                }
+                else
+                {
+                    throw new ArgumentException("authentification");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

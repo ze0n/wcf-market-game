@@ -20,6 +20,12 @@ namespace Client.Market {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPublicMarketService/ActivateMeAt", ReplyAction="http://tempuri.org/IPublicMarketService/ActivateMeAtResponse")]
         void ActivateMeAt(string username, string password, string EndpointAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPublicMarketService/Craft", ReplyAction="http://tempuri.org/IPublicMarketService/CraftResponse")]
+        MarketGame.Resource Craft(System.Guid[] take, string restTypeToGet, string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPublicMarketService/GetMyResources", ReplyAction="http://tempuri.org/IPublicMarketService/GetMyResourcesResponse")]
+        MarketGame.Resource[] GetMyResources(string username, string password);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,6 +61,14 @@ namespace Client.Market {
         
         public void ActivateMeAt(string username, string password, string EndpointAddress) {
             base.Channel.ActivateMeAt(username, password, EndpointAddress);
+        }
+        
+        public MarketGame.Resource Craft(System.Guid[] take, string restTypeToGet, string username, string password) {
+            return base.Channel.Craft(take, restTypeToGet, username, password);
+        }
+        
+        public MarketGame.Resource[] GetMyResources(string username, string password) {
+            return base.Channel.GetMyResources(username, password);
         }
     }
 }
