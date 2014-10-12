@@ -18,13 +18,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:9000/MarketAPI/" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:8732/Design_Time_Addresses/MarketAPI/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="a587a161-266d-44be-a949-27a52ba78374" SourceId="1" SourceUrl="http://localhost:9000/MarketAPI/?disco" />
-    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="af70d36f-d4c9-40c4-949a-52e92afcc99e" SourceId="1" SourceUrl="http://localhost:9000/MarketAPI/?xsd=xsd1" />
-    <MetadataFile FileName="PublicMarketService.wsdl" MetadataType="Wsdl" ID="a09b8cf7-af30-4ec2-9de8-8bc1b4ced723" SourceId="1" SourceUrl="http://localhost:9000/MarketAPI/?wsdl" />
-    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="34ae478e-1408-47ee-816b-df6a1e4168d8" SourceId="1" SourceUrl="http://localhost:9000/MarketAPI/?xsd=xsd0" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="c55a858a-3424-4063-b70c-d204b1565d2e" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/MarketAPI/?xsd=xsd3" />
+    <MetadataFile FileName="item21.xsd" MetadataType="Schema" ID="76ea091c-bf18-4002-8aa1-43301f8d16ac" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/MarketAPI/?xsd=xsd0" />
+    <MetadataFile FileName="item1.disco" MetadataType="Disco" ID="45f25672-9fc1-4952-998d-8f00f2f9620f" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/MarketAPI/?disco" />
+    <MetadataFile FileName="item22.xsd" MetadataType="Schema" ID="e3d17ec3-ac83-40e0-9e1d-c41d5fdf09e9" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/MarketAPI/?xsd=xsd1" />
+    <MetadataFile FileName="item23.xsd" MetadataType="Schema" ID="5a377be1-61cc-41bc-bd00-1aad7956b27e" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/MarketAPI/?xsd=xsd2" />
+    <MetadataFile FileName="PublicMarketService1.wsdl" MetadataType="Wsdl" ID="8c7ad587-2173-4ef4-b9e8-32b2034bdf30" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/MarketAPI/?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

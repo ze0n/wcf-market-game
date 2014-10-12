@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleCommander.cs" />
     <Compile Include="ITestTrader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -57,13 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Service References\Market\item.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Market\item1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Market\PublicMarketService.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MarketGameClientLib.csproj">
@@ -78,19 +72,33 @@
     <WCFMetadataStorage Include="Service References\Market\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\Market\item.disco" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Properties\DataSources\MarketGame.Resource.datasource" />
     <None Include="Service References\Market\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\Market\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\Market\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Market\item21.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Market\item22.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Market\item23.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Market\PublicMarketService1.wsdl" />
     <None Include="Service References\Market\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Market\item1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

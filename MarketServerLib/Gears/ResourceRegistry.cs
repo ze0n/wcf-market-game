@@ -237,5 +237,13 @@ namespace MarketServerLib.Gears
 
             
         }
+
+        public Resource[] GetUserResources(string username)
+        {
+            lock (_syncData)
+            {
+                return Resources.Values.Where(resource => resource.Owner == username).Select(resource => resource.Resource).ToArray();
+            }
+        }
     }
 }

@@ -8,7 +8,6 @@ using MarketGame;
 
 namespace Client
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "TestTrader" in both code and config file together.
     public class TestTrader : ITestTrader
     {
         public void DoWork()
@@ -22,7 +21,9 @@ namespace Client
 
         public void ReceiveResource(Resource resource)
         {
-            Console.WriteLine(resource);
+            Console.WriteLine();
+            Console.WriteLine("Received resource {0}", resource.ToString());
+            Console.WriteLine();
         }
 
         public string[] GetResourcesOffer()
