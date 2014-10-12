@@ -84,7 +84,7 @@ namespace MarketServerLib.Generator
                 Console.WriteLine("-------------------------------------------------");
 
 
-                Thread.Sleep(20000);
+                Thread.Sleep(60000);
 
                 if (StopRequest)
                 {
